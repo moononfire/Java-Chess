@@ -10,8 +10,7 @@ public class Input {
         this.scanner = new Scanner(System.in);
     }
 
-    public String get(String message) {
-        System.out.println(message);
+    public String get() {
         String line = scanner.nextLine();
         return line;
     }

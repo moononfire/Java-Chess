@@ -2,7 +2,7 @@ package io;
 
 public class Output {
 
-    public static void write(String message) {
+    public static void writeToConsole(String message) {
         System.out.println(message);
     }
 }
