@@ -1,26 +1,19 @@
 package game.board;
 
-import game.board.field.Field;
-import util.Util;
-
-import java.util.HashMap;
-import java.util.Map;
+import game.board.spot.Spot;
 
 public class Board {
 
-    Map<String, Field> fields;
+    Spot[][] spots;
 
     public Board() {
-        fields = new HashMap<>();
-
-        for (int i = 1; i <= 8; ++i) {
-            for (int j = 0; j < 8; ++j) {
-                fields.put(Util.transformIndex(j + 1) + i, new Field());
-            }
-        }
+        spots = new Spot[8][8];
     }
 
-    public Field getField(String XY) {
-        return fields.get(XY);
+    public Spot spotAt(String XY) {
+        char row = XY.charAt(0);
+        char column = XY.charAt(1);
+
+        return spots[row - 65][column - 49];
     }
 }

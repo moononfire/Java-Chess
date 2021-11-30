@@ -1,6 +1,6 @@
 package app;
 
-import game.board.Game;
+import game.Game;
 import io.Input;
 import io.Output;
 
@@ -19,7 +19,7 @@ public class App {
     }
 
     public static String getUserInput() {
-        return input.get();
+        return input.getMove();
     }
 
     public static String writeThenGetInput(String message) {

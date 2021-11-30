@@ -1,8 +1,8 @@
-package game.board.field;
+package game.board.spot;
 
-import game.board.figure.Piece;
+import game.piece.Piece;
 
-public class Field {
+public class Spot {
 
     private Piece piece;
 
