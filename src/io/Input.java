@@ -18,7 +18,7 @@ public class Input {
                 line.charAt(2)>=65 && line.charAt(2)<=72 &&
                 line.charAt(1)>=49 && line.charAt(1)<=56 &&
                 line.charAt(3)>=49 && line.charAt(3)<=56) || line.length() != 4) {
-            App.write("This is not a valid move!");
+            App.write("This is not an accepted move!");
             line = scanner.nextLine();
         }
         return line;

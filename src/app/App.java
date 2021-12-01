@@ -1,6 +1,7 @@
 package app;
 
 import game.Game;
+import game.board.Board;
 import io.Input;
 import io.Output;
 

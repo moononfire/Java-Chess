@@ -25,6 +25,8 @@ public class Game {
         activePlayer = "white";
 
         while(!checkMate) {
+            App.write(board.toString());
+
             String move = App.writeThenGetInput("Your move " + activePlayer + ":");
             String startPos = move.substring(0, 2);
             String endPos = move.substring(2, 4);
@@ -32,8 +34,9 @@ public class Game {
             if (validateMove(startPos, endPos)) {
                 mate = false;
                 checkForMate(move);
-                Piece piece = board.spotAt(move.substring(0, 2)).getPiece();
-                board.spotAt(move.substring(2, 4)).setPiece(piece);
+                Piece movedPiece = board.spotAt(startPos).getPiece();
+                board.spotAt(endPos).setPiece(movedPiece);
+                board.spotAt(startPos).setPiece(null);
 
                 if (activePlayer.equals("white")) {
                     activePlayer = "black";
@@ -44,15 +47,35 @@ public class Game {
                 App.write("Incorrect move! Try again...");
             }
         }
+
+        App.getUserInput();
     }
 
     public boolean validateMove(String startPos, String endPos) {
-        if(!board.spotAt(startPos).getPiece().isMoveValid(startPos, endPos)) {
+        if (board.spotAt(startPos).getPiece() == null) {
+            App.write("There is no piece at the starting position!");
             return false;
         }
-        if (mate) {
-            //
+
+        if (!board.spotAt(startPos).getPiece().getColor().equals(activePlayer)) {
+            App.write("You are only allowed to move your pieces!");
+            return false;
         }
+
+        if (mate && !board.pieceAt(startPos).getName().equals("King")) {
+            App.write("During a mate you must move the King!");
+        }
+
+        if(!board.spotAt(startPos).getPiece().isMoveValid(startPos, endPos)) {
+            App.write("This piece does not move in this way!");
+            return false;
+        }
+
+        if(board.spotAt(endPos).isOccupied() && board.pieceAt(endPos).getColor().equals(activePlayer)) {
+            App.write("You cannot move a piece to where your another piece stands!");
+            return false;
+        }
+
         return true;
     }
 
@@ -81,12 +104,12 @@ public class Game {
         board = new Board();
 
         board.spotAt("A1").setPiece(new Rook("white"));
-        board.spotAt("B1").setPiece(new Knight("white"));
-        board.spotAt("C1").setPiece(new Bishop("white"));
+        board.spotAt("B1").setPiece(new Bishop("white"));
+        board.spotAt("C1").setPiece(new Knight("white"));
         board.spotAt("D1").setPiece(new Queen("white"));
         board.spotAt("E1").setPiece(new King("white"));
-        board.spotAt("F1").setPiece(new Bishop("white"));
-        board.spotAt("G1").setPiece(new Knight("white"));
+        board.spotAt("F1").setPiece(new Knight("white"));
+        board.spotAt("G1").setPiece(new Bishop("white"));
         board.spotAt("H1").setPiece(new Rook("white"));
 
         board.spotAt("A2").setPiece(new Pawn("white"));
@@ -99,12 +122,12 @@ public class Game {
         board.spotAt("H2").setPiece(new Pawn("white"));
 
         board.spotAt("A8").setPiece(new Rook("black"));
-        board.spotAt("B8").setPiece(new Knight("black"));
-        board.spotAt("C8").setPiece(new Bishop("black"));
+        board.spotAt("B8").setPiece(new Bishop("black"));
+        board.spotAt("C8").setPiece(new Knight("black"));
         board.spotAt("D8").setPiece(new Queen("black"));
         board.spotAt("E8").setPiece(new King("black"));
-        board.spotAt("F8").setPiece(new Bishop("black"));
-        board.spotAt("G8").setPiece(new Knight("black"));
+        board.spotAt("F8").setPiece(new Knight("black"));
+        board.spotAt("G8").setPiece(new Bishop("black"));
         board.spotAt("H8").setPiece(new Rook("black"));
 
         board.spotAt("A7").setPiece(new Pawn("black"));
