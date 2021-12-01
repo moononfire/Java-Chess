@@ -1,5 +1,7 @@
 package game.piece;
 
+import game.board.Board;
+
 public class Rook extends Piece {
 
     public Rook(String color) {
@@ -7,7 +9,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public boolean isMoveValid(String startPos, String endPos) {
+    public boolean isMoveValid(String startPos, String endPos, Board board) {
         return true;
     }
 

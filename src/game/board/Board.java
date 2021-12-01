@@ -3,8 +3,6 @@ package game.board;
 import game.board.spot.Spot;
 import game.piece.Piece;
 
-import java.util.Arrays;
-
 public class Board {
 
     Spot[][] spots;

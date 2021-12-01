@@ -10,10 +10,6 @@ public class Spot {
         return piece != null;
     }
 
-    public boolean isFree() {
-        return !isOccupied();
-    }
-
     public Piece getPiece() {
         return piece;
     }

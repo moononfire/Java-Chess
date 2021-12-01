@@ -33,7 +33,6 @@ public class Game {
 
             if (validateMove(startPos, endPos)) {
                 mate = false;
-                checkForMate(move);
                 Piece movedPiece = board.spotAt(startPos).getPiece();
                 board.spotAt(endPos).setPiece(movedPiece);
                 board.spotAt(startPos).setPiece(null);
@@ -62,42 +61,61 @@ public class Game {
             return false;
         }
 
-        if (mate && !board.pieceAt(startPos).getName().equals("King")) {
-            App.write("During a mate you must move the King!");
-        }
-
-        if(!board.spotAt(startPos).getPiece().isMoveValid(startPos, endPos)) {
-            App.write("This piece does not move in this way!");
-            return false;
-        }
-
         if(board.spotAt(endPos).isOccupied() && board.pieceAt(endPos).getColor().equals(activePlayer)) {
             App.write("You cannot move a piece to where your another piece stands!");
             return false;
         }
 
+        if (mate && !board.pieceAt(startPos).getName().equals("King")) {
+            App.write("During a mate you must move the King!");
+            return false;
+        }
+
+        if(!board.spotAt(startPos).getPiece().isMoveValid(startPos, endPos, board)) {
+            App.write("This piece cannot move in this way!");
+            return false;
+        }
+
+        if (checkForMate(startPos, endPos)) {
+            App.write("Mate!");
+            mate = true;
+        }
+
+        if (checkForCheckmate(startPos, endPos)) {
+            App.write("Checkmate!");
+            App.write(activePlayer + " wins!");
+        }
+
         return true;
     }
 
-    public boolean checkForMate(String move) {
+    //check if any of the opposite standing pieces can hurt the King
+    public boolean checkForMate(String startPos, String endPos) {
         if (false) {
-            App.write("Mate!");
-            mate = true;
-            checkForCheckmate(move);
-        }
-
-        return false;
-    }
-
-    public boolean checkForCheckmate(String move) {
-        if (false) {
-            App.write("Checkmate!");
-            App.write(activePlayer + " wins!");
-            checkMate = true;
             return true;
         }
 
         return false;
+    }
+
+    public void setMateTrue() {
+        mate = true;
+    }
+
+    //check if any of the opposite standing pieces can hurt the King AND if the King can move
+    public boolean checkForCheckmate(String startPos, String endPos) {
+        if (false) {
+            if (false) {
+                checkMate = true;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void setCheckmateTrue() {
+        checkMate = true;
     }
 
     private void initiateBoard() {
